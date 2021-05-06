@@ -1,0 +1,83 @@
+<span>
+  <a routerLink="/users" style="color: #43699d;font-weight: bold;display: inline-block;margin: -26px 0 0 0;float: right;text-decoration: underline;">
+    Go Back To Facilities
+  </a>
+</span>
+<div class="kt-portlet">
+  <div class="kt-portlet__head">
+    <div class="kt-portlet__head-label">
+      <h3 class="kt-portlet__head-title"><span>All Contacts</span></h3>
+    </div>
+    <div class="kt-portlet__head-toolbar">
+      <button routerLink="/users/addcontact/{{patientId}}" class="btn btn-blue">Add Contact</button>
+    </div>
+  </div>
+
+  <div class="kt-portlet__body pt-0">
+    <mat-form-field class="mat-form-field-infix">
+     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+   </mat-form-field>
+   
+    <div class="table-responsive"> 
+      <div class="mat-table__wrapper "> 
+        <mat-table #table [dataSource]="dataSource">
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef check>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row" check>
+                <mat-checkbox (click)="$event.stopPropagation()"
+                (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="name" >
+            <mat-header-cell *matHeaderCellDef sellerName cell-center> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element" sellerName cell-center> {{element.name}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef emailAddress cell-center> Email</mat-header-cell>
+            <mat-cell *matCellDef="let element" emailAddress cell-center> {{element.email}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="contact">
+            <mat-header-cell *matHeaderCellDef emailAddress cell-center> Contact</mat-header-cell>
+            <mat-cell *matCellDef="let element" emailAddress cell-center> {{element.phone}} </mat-cell>
+          </ng-container>
+   
+          <!-- Action Column -->
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef action cell-center> Action </mat-header-cell>
+            <mat-cell *matCellDef="let element" action cell-center> 
+              
+              <button routerLink="/users/editcontact/{{element._id}}" primary mat_primary_color mat-icon-button color="pink" matTooltip="Edit  Contact">
+                <i class="fa fa-pencil-alt"></i>
+              </button>
+
+              &nbsp;         
+
+              <button danger mat-icon-button color="danger" matTooltip="Delete" type="button" (click)="deleteContact(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+
+    <mat-paginator #paginator
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+    [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+</div>

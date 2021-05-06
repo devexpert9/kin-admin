@@ -1,0 +1,178 @@
+:host {
+	::ng-deep {
+		ngb-tabset > .nav-tabs {
+			display: none;
+		}
+	}
+	
+	
+}
+.countHit{
+    background: cadetblue;
+    color: #fff;
+    font-weight: 500;
+    padding: 2px 8px;
+}
+
+.card
+{     
+    border:none;
+    border-bottom: 3px solid rgba(93,120,255,.2);
+    box-shadow: 0 0 13px 0 rgba(82,63,105,.05);
+  .card-body
+  {
+  .card-inner
+  {    align-items: center;
+    p
+	{
+	  &.card-number
+	  {
+	        font-weight: 600;
+			font-size: 1.8rem;
+			color: #646c9a;
+	  }
+	  &.card-title
+	  {     color: #74788d;
+			font-size: 1.1rem;
+			font-weight: 400;
+			margin-top: .55rem;
+	  }
+	}
+  }
+  }
+}
+.text-pink
+{
+color:#6baee2;
+}
+.text-green
+{
+color:#0abb87
+}
+[pos]{
+ flex: 0 0 7% ;
+  width: 7% ;
+}
+
+[check]
+{
+ flex: 0 0 10% ;
+  width: 10% ;
+}
+[title]
+{
+ flex: 0 0 22%;
+  width: 22% ;
+}
+[last]
+{    justify-content: center;
+}
+.max-width-90
+{
+    max-width: 90px;
+    white-space: normal;
+}
+.max-width-60
+{
+    max-width: 60px;
+    white-space: normal;
+}
+[cell_center]{
+	display:flex;
+	justify-content: center;
+}
+
+[action-box]{
+  padding-right: 10px !important;
+    padding-left: 10px !important;
+}
+/*
+[sellerName]{
+	flex: 0 0 12%;
+  width: 12% ;
+}
+[address]{
+	flex: 0 0 15%;
+  width: 15% ;
+}
+[result]{
+	 flex: 0 0 10%;
+  width: 10% ;
+}
+[status]{
+	 flex: 0 0 10%;
+  width: 10% ;
+}*/
+
+[emailAddress]{
+	flex: 0 0 15%;
+  width: 15% ;
+}
+[action]{
+	 flex: 0 0 18%;
+  width: 18% ;
+}
+
+[primary] { 
+       background: #6bade1;
+	color: #fff;
+}
+[danger] {
+       background: #d60101;
+    color: #fff;
+}
+mat-cell.InActive span.badge {
+    background-color: #da3545;
+}
+[cell-center]{
+  display:flex;    text-align: center;
+  justify-content: center;
+}
+[datareport].kt-portlet__head {
+display: inline-block;
+    width: 100%;
+    padding-top: 13px;
+    min-height: 85px;
+}
+.rightside
+{    margin-top: 10px; display: flex;
+    align-items: center;flex-wrap: wrap;
+	select
+	{font-size: 12px;
+	margin-left: 5px;
+    padding: 3px;
+    border: 1px solid #ddd;
+	}
+ [boxes]
+ { 
+     display: flex;flex-wrap: wrap;
+    align-items: center;
+	[mar-15]
+	{    margin-right: 15px;
+    margin-left: 0px;
+	}
+[box1]
+{    align-items: center;
+    display: flex;
+ [color] {margin-right:-1px;
+    width: 20px;
+    height: 19px;
+    background: #dee3fe;
+    display: inline-block;
+    float: left;
+}
+}  
+[box2]
+{   align-items: center;
+    display: flex;
+ [color] {margin-right:-1px;
+    width: 20px;
+    height: 19px;
+    background: #91a4ff;
+    display: inline-block;
+    float: left;
+}
+} 
+}  
+ 
+}

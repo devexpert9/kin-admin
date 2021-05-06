@@ -1,0 +1,61 @@
+
+<!--begin::Body-->
+<div class="kt-login__body">
+	<!--begin::Signin-->
+	<div class="kt-login__form">
+		<div class="kt-login__title">
+		<div  class="home-logo"><div  class="animatin">
+		<span>
+		<img src="assets/media/logos/kin-logo.png" alt=""></span>
+		</div></div>
+			<h3>Sign In To Admin</h3>
+		</div>
+
+		<form class="kt-form" [formGroup]="loginForm" autocomplete="off">
+			<div class="form-group">
+				<mat-form-field>
+					<mat-label>{{ 'AUTH.INPUT.EMAIL' | translate }}</mat-label>
+					<input class="" matInput type="email" placeholder="{{ 'AUTH.INPUT.EMAIL' | translate }}" formControlName="email" autocomplete="off"/>
+					<mat-error *ngIf="isControlHasError('email','required')">
+						<strong>Please enter email</strong>
+					</mat-error>
+					<mat-error *ngIf="isControlHasError('email','email')">
+						<strong>Please enter valid email</strong>
+					</mat-error>
+					<mat-error *ngIf="isControlHasError('email','minlength')">
+						<strong>Minimum 6 characters are required for email</strong>
+					</mat-error>
+					<mat-error *ngIf="isControlHasError('email','maxlength')">
+						<strong>Maximum 320 characters are required for email</strong>
+					</mat-error>
+				</mat-form-field>
+			</div>
+			<div class="form-group">
+				<mat-form-field>
+					<mat-label>{{ 'AUTH.INPUT.PASSWORD' | translate }}</mat-label>
+					<input class="" matInput type="password" placeholder="{{ 'AUTH.INPUT.PASSWORD' | translate }}" formControlName="password" autocomplete="off"/>
+					<mat-error *ngIf="isControlHasError('password','required')">
+						<strong>Please enter password</strong>
+					</mat-error>
+					<mat-error *ngIf="isControlHasError('password','minlength')">
+						<strong>Minimum 6 characters are required for password</strong>
+					</mat-error>
+					<mat-error *ngIf="isControlHasError('password','maxlength')">
+						<strong>Maximum 100 characters are required for password</strong>
+					</mat-error>
+				</mat-form-field>
+			</div>
+			<div class="form-group termsCheck rememberPas">
+				<!-- <a href="javascript:void(0)" routerLink="/auth/forgot-password" style="color:#a1cf4b;font-weight:bold;">Forgot Password?</a> -->
+			</div>
+			<div class="kt-login__actions">
+				<button (click)="submit()" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" id="kt_login_signin_submit" class="btn btn-log btn-block btn-thm2 mt-5" style="background: #fff;border-radius: 20px;width: 50%;margin: 0 auto;">
+					{{ 'AUTH.LOGIN.BUTTON' | translate }}
+				</button>
+			</div>
+		</form>
+	
+	</div>
+	<!--end::Signin-->
+</div>
+<!--end::Body-->

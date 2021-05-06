@@ -1,0 +1,135 @@
+<span>
+  <a routerLink="/users" style="color: #43699d;font-weight: bold;display: inline-block;margin: -26px 0 0 0;float: right;text-decoration: underline;">
+    Go Back To Facilities
+  </a>
+</span>
+<div class="kt-portlet">
+  <div class="kt-portlet__head">
+    <div class="kt-portlet__head-label">
+      <h3 class="kt-portlet__head-title"><span>All Patients</span></h3>
+    </div>
+    <div class="kt-portlet__head-toolbar">
+      <button routerLink="/users/addmember/{{id}}" class="btn btn-blue">Add Patient</button>
+    </div>
+  </div>
+
+  <div class="kt-portlet__body pt-0">
+    <mat-form-field class="mat-form-field-infix">
+     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+   </mat-form-field>
+   
+   <div class="table-responsive"> 
+    <div class="mat-table__wrapper "> 
+     <mat-table #table [dataSource]="dataSource">
+
+       <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef check>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" check>
+        <mat-checkbox (click)="$event.stopPropagation()"
+        (change)="$event ? selection.toggle(row) : null"
+        [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </mat-cell>
+  </ng-container>
+  <!-- Position Column -->
+    <!-- <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef pos cell-center> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element" pos cell-center> {{element.firstname}} </mat-cell>
+    </ng-container> -->
+  <!-- Image Column -->
+    <!-- <ng-container matColumnDef="members" >
+      <mat-header-cell *matHeaderCellDef sellerName> Total Members </mat-header-cell>
+      <mat-cell *matCellDef="let element"  sellerName>   <span class="badge badge-secondary"> <a routerLink="/users/members" href="javascript:void(0)">{{element.firstname}} </a></span></mat-cell>
+    </ng-container> -->
+  <!-- Image Column -->
+    <!-- <ng-container matColumnDef="photo" >
+      <mat-header-cell *matHeaderCellDef class="max-width-60"> Image </mat-header-cell>
+      <mat-cell *matCellDef="let element"  class="max-width-60">    
+        <img  class="table-user rounded-circle img-thumbnail" width="60px" height="60px" src="{{element.photo}}"/> </mat-cell>
+    </ng-container> -->
+    <!-- Name Column -->
+    <ng-container matColumnDef="name" >
+      <mat-header-cell *matHeaderCellDef sellerName cell-center> Patient Name </mat-header-cell>
+      <mat-cell *matCellDef="let element" sellerName cell-center> {{element.firstname}} {{element.lastname}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef emailAddress cell-center> Patient Email</mat-header-cell>
+      <mat-cell *matCellDef="let element" emailAddress cell-center> {{element.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="contact">
+      <mat-header-cell *matHeaderCellDef emailAddress cell-center> Patient Contact</mat-header-cell>
+      <mat-cell *matCellDef="let element" emailAddress cell-center> {{element.contact}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="room">
+      <mat-header-cell *matHeaderCellDef emailAddress cell-center> Room Number</mat-header-cell>
+      <mat-cell *matCellDef="let element" emailAddress cell-center> {{element.room_no}} </mat-cell>
+    </ng-container>
+ 
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef action cell-center> Action </mat-header-cell>
+      <mat-cell *matCellDef="let element" action cell-center> 
+        <!-- <button  routerLink="/users/contacts" secondary mat_primary_color mat-icon-button color="pink" matTooltip="Contacts"> -->
+          <!-- <i class="fa fa-phone"></i> -->
+        <!-- </button>  &nbsp;     -->
+        <button routerLink="/users/contacts/{{element._id}}" primary mat_primary_color mat-icon-button color="pink" matTooltip="View Contacts">
+          <i class="fa fa-phone"></i>
+        </button>
+
+        &nbsp;         
+
+        <button routerLink="/users/editmember/{{element._id}}" primary mat_primary_color mat-icon-button color="pink" matTooltip="Edit  Patient">
+          <i class="fa fa-pencil-alt"></i>
+        </button>
+
+        &nbsp;         
+
+        <button danger mat-icon-button color="danger" matTooltip="Delete" type="button" (click)="deletePatient(element)">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+     </mat-cell>
+   </ng-container>
+
+    
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+ </mat-table>
+</div>
+</div>
+<mat-paginator #paginator
+[pageSize]="10"
+[pageSizeOptions]="[5, 10, 20]"
+[showFirstLastButtons]="true">
+</mat-paginator>
+</div>
+</div>
+<div class="kt-section">
+  <div class="kt-section__content">
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-body pt-4">
+        <button type="button" class="close close-modal" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div  class="modal-inner text-center">
+          <i class="flaticon2-close-cross fa-4x close-icon"></i>
+          <h4 class="mb-3">Are You Sure ?</h4>
+          <p class="mb-0">Are you sure you want to delete this records? This process cannot be undone</p>
+        </div>
+      </div>
+      <div class="modal-footer pt-4 no-border pt-0 justify-content-center pb-4">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </ng-template>
+  </div>
+</div>

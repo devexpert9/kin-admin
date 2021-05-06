@@ -1,0 +1,197 @@
+<div class="kt-portlet">
+	<div class="kt-portlet__head">
+		<div class="kt-portlet__head-label">
+			<h3 class="kt-portlet__head-title"><span>Reports</span></h3>
+		</div>
+	</div>
+	<div class="kt-portlet__body">
+		<div class="row">
+			<div class="col-md-12 profile_form">
+				<div class="kt-login__form">
+				 	<div class="head mb-2 ">
+					   	<h2 style="font-size:15px">Search With Below Filters</h2>
+				  	</div>
+
+					<div class="row grp_form" >
+						<form class="kt-form" [formGroup]="loginForm" autocomplete="off" style="width:100%;">
+							<div class="form-group">
+								<mat-form-field class="mat-form-field-fluid">
+									<label>From Date</label>
+									<input type='date' matInput formControlName="start_date"/>
+									<mat-error *ngIf="isControlHasError('start_date','required')">Start Date is <strong>required</strong>
+									</mat-error>
+								</mat-form-field>
+							</div>
+
+							<div class="form-group">
+								<mat-form-field class="mat-form-field-fluid">
+									<label>To Date</label>
+									<input type='date' matInput formControlName="end_date"/>
+									<mat-error *ngIf="isControlHasError('end_date','required')">End Date is <strong>required</strong>
+									</mat-error>
+								</mat-form-field>
+							</div>
+
+							<div class="form-group">
+								<mat-form-field>
+									<label>Search Option</label>
+									<mat-select [(value)]="selected"formControlName="option" autocomplete="off">
+									    <mat-option value="faculty">Facility</mat-option>
+									    <mat-option value="patient">Patient</mat-option>
+									    <mat-option value="contact">Contact</mat-option>
+									    <mat-option value="calls">Scheduled Calls</mat-option>
+								  	</mat-select>
+
+									<mat-error *ngIf="isControlHasError('option','required')">
+										Option is <strong>required</strong>
+									</mat-error>
+								</mat-form-field>
+							</div>
+							
+							<div class="form-group" style="width:10%!important">
+								<button (click)="submit()" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" id="kt_login_signin_submit" class="btn btn-log btn-block btn-thm2 mt-5" style="background: #60a8e0;border-radius: 20px;width: 100%;color:#fff;float: right;margin:34px 0 0 0!important;">
+									Search
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- RECORDS ARE BELOW ----------------->
+	<h2 *ngIf='searchOption' style="font-size: 17px;margin: 0 0 0 24px;border-bottom: 1px solid #646c9a;">
+		<p *ngIf='searchOption != "calls"'>
+			Search Records for {{searchOption}}(s)
+		</p>
+		<p *ngIf='searchOption == "calls"'>
+			Search Records for Scheduled Call(s)
+		</p>
+	</h2>
+
+	<div class="kt-portlet__body pt-0" *ngIf='searchOption'>
+    	<mat-form-field class="mat-form-field-infix" style='width:30%'>
+ 			<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+   		</mat-form-field>
+
+		<div class="table-responsive" *ngIf='searchOption != "calls"'> 
+		    <div class="mat-table__wrapper "> 
+			 	<mat-table #table [dataSource]="dataSource">
+				   	<ng-container matColumnDef="select">
+				        <mat-header-cell *matHeaderCellDef check>
+				          <mat-checkbox (change)="$event ? masterToggle() : null"
+				          [checked]="selection.hasValue() && isAllSelected()"
+				          [indeterminate]="selection.hasValue() && !isAllSelected()">
+				        </mat-checkbox>
+				      	</mat-header-cell>
+				      	<mat-cell *matCellDef="let row" check>
+				        <mat-checkbox (click)="$event.stopPropagation()"
+				        (change)="$event ? selection.toggle(row) : null"
+				        [checked]="selection.isSelected(row)">
+				      	</mat-checkbox>
+				    	</mat-cell>
+				  	</ng-container>
+
+				    <ng-container matColumnDef="name" >
+				      <mat-header-cell *matHeaderCellDef sellerName cell-center style='text-transform:capitalize;'> {{searchOption}} name </mat-header-cell>
+				      <mat-cell *matCellDef="let element" sellerName cell-center> {{element?.name}}</mat-cell>
+				    </ng-container>
+
+				    <ng-container matColumnDef="email" >
+				      <mat-header-cell *matHeaderCellDef sellerName cell-center style='text-transform:capitalize;'> {{searchOption}} email </mat-header-cell>
+				      <mat-cell *matCellDef="let element" sellerName cell-center> {{element?.email}}</mat-cell>
+				    </ng-container>
+
+				    <ng-container matColumnDef="faculty">
+				      	<mat-header-cell *matHeaderCellDef emailAddress cell-center style='text-transform:capitalize;'> faculty name</mat-header-cell>
+				    	<mat-cell *matCellDef="let element" emailAddress cell-center> {{element?.facName}} </mat-cell>
+				    </ng-container>
+
+				    <ng-container matColumnDef="patient">
+				      <mat-header-cell *matHeaderCellDef emailAddress cell-center style='text-transform:capitalize;'> patient</mat-header-cell>
+				      <mat-cell *matCellDef="let element" emailAddress cell-center>
+				      	<ng-container  *ngIf='element?.patientName != ""'>
+				      		{{element?.patientName}} 
+				      	</ng-container>
+				      	<ng-container  *ngIf='element?.patientName == ""'>
+				      		-NA- 
+				      	</ng-container>
+				      </mat-cell>
+				    </ng-container>
+
+				    <ng-container matColumnDef="contact">
+				      <mat-header-cell *matHeaderCellDef emailAddress cell-center style='text-transform:capitalize;'> {{searchOption}} phone number</mat-header-cell>
+				      	<mat-cell *matCellDef="let element" emailAddress cell-center>
+				       		<ng-container  *ngIf='element?.contact != ""'>
+				      			{{element?.contact}} 
+					      	</ng-container>
+					      	<ng-container  *ngIf='element?.contact == ""'>
+					      		-NA- 
+					      	</ng-container>
+				   		</mat-cell>
+				    </ng-container>
+			 
+			    	<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+			    	<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+			 	</mat-table>
+			</div>
+		</div>
+
+		<div class="table-responsive" *ngIf='searchOption == "calls"'> 
+		    <div class="mat-table__wrapper "> 
+			 	<mat-table #table [dataSource]="dataSource">
+				   	<ng-container matColumnDef="select">
+				        <mat-header-cell *matHeaderCellDef check>
+				          <mat-checkbox (change)="$event ? masterToggle() : null"
+				          [checked]="selection.hasValue() && isAllSelected()"
+				          [indeterminate]="selection.hasValue() && !isAllSelected()">
+				        </mat-checkbox>
+				      	</mat-header-cell>
+				      	<mat-cell *matCellDef="let row" check>
+				        <mat-checkbox (click)="$event.stopPropagation()"
+				        (change)="$event ? selection.toggle(row) : null"
+				        [checked]="selection.isSelected(row)">
+				      	</mat-checkbox>
+				    	</mat-cell>
+				  	</ng-container>
+
+				    <ng-container matColumnDef="name" >
+				      <mat-header-cell *matHeaderCellDef sellerName cell-center style='text-transform:capitalize;'> Patient Name</mat-header-cell>
+				      <mat-cell *matCellDef="let element" sellerName cell-center> {{element?.patientName}}</mat-cell>
+				    </ng-container>
+
+				    <ng-container matColumnDef="email" >
+				      <mat-header-cell *matHeaderCellDef sellerName cell-center style='text-transform:capitalize;'> Contact Name </mat-header-cell>
+				      <mat-cell *matCellDef="let element" sellerName cell-center> {{element?.contactName}}</mat-cell>
+				    </ng-container>
+
+				    <ng-container matColumnDef="faculty">
+				      	<mat-header-cell *matHeaderCellDef emailAddress cell-center style='text-transform:capitalize;'> Call Date</mat-header-cell>
+				    	<mat-cell *matCellDef="let element" emailAddress cell-center> {{element?.callDate | date}} </mat-cell>
+				    </ng-container>
+
+				    <ng-container matColumnDef="patient">
+				      <mat-header-cell *matHeaderCellDef emailAddress cell-center style='text-transform:capitalize;'> Call Time</mat-header-cell>
+				      <mat-cell *matCellDef="let element" emailAddress cell-center>
+				      	{{element?.callTime | date:'shortTime'}}
+				      </mat-cell>
+				    </ng-container>
+
+				    <ng-container matColumnDef="contact">
+				      <mat-header-cell *matHeaderCellDef emailAddress cell-center style='text-transform:capitalize;'> Scheduled Date</mat-header-cell>
+				      	<mat-cell *matCellDef="let element" emailAddress cell-center>
+				       		{{element?.created_on | date}}
+				   		</mat-cell>
+				    </ng-container>
+			 
+			    	<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+			    	<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+			 	</mat-table>
+			</div>
+		</div>
+	</div>
+
+	<mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"  *ngIf='searchOption'>
+	</mat-paginator>
+</div>

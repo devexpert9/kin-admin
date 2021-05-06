@@ -1,0 +1,102 @@
+<div class="kt-portlet">
+	<div class="kt-portlet__head">
+		<div class="kt-portlet__head-label">
+			<h3 class="kt-portlet__head-title"><span>Add Contact</span></h3>
+		</div>
+		<div class="kt-portlet__head-toolbar">
+			<button  routerLink="/users/members/{{patientId}}"  class="btn btn-blue">Back To Patients</button>
+		</div>
+	</div>
+	<div class="kt-portlet__body">
+		<div class="row">
+			<!-- <div class="col-md-4">
+				<div class=" profile_user">
+				<div class="card">
+					<div class="card-body text-center">
+						<div class="user-image ">
+							<img class="rounded-circle img-thumbnail" src="assets/media/users/default.jpg"/>
+							<label  for="user-img">Upload Picture</label>
+							<input  id="user-img" name="user-img" style="display:none" type="file">
+						</div>
+					</div>
+				</div>
+				</div>
+			</div> -->
+			<div class="col-md-12 profile_form">
+				<div class="kt-login__form">
+				 	<div class="head mb-2 ">
+					   	<h2>Basic Info</h2>
+				  	</div>
+
+					<div class="row grp_form" >
+						<form class="kt-form" [formGroup]="loginForm" autocomplete="off">
+							<div class="form-group">
+								<mat-form-field>
+									<!-- <mat-label>First Name</mat-label> -->
+									<input class="" matInput type="text" placeholder="Enter Name" formControlName="name" autocomplete="off"/>
+									<mat-error *ngIf="isControlHasError('name','required')">
+										<strong>Please enter name</strong>
+									</mat-error>
+								</mat-form-field>
+							</div>
+
+							<div class="form-group">
+								<mat-form-field>
+									<mat-label>Email</mat-label>
+									<input class="" matInput type="email" placeholder="Email" formControlName="email" autocomplete="off"/>
+									<mat-error *ngIf="isControlHasError('email','required')">
+										<strong>Please enter email</strong>
+									</mat-error>
+									<mat-error *ngIf="isControlHasError('email','email')">
+										<strong>Please enter valid email</strong>
+									</mat-error>
+									<mat-error *ngIf="isControlHasError('email','minlength')">
+										<strong>Minimum 6 characters are required for email</strong>
+									</mat-error>
+									<mat-error *ngIf="isControlHasError('email','maxlength')">
+										<strong>Maximum 320 characters are required for email</strong>
+									</mat-error>
+								</mat-form-field>
+							</div>
+
+							<div class="form-group">
+								<mat-form-field>
+									<mat-label>Contact Number</mat-label>
+									<input class="" matInput type="text" placeholder="Phone Number" formControlName="phone" autocomplete="off"/>
+									<mat-error *ngIf="isControlHasError('phone','required')">
+										<strong>Please enter contact number.</strong>
+									</mat-error>
+									<mat-error *ngIf="isControlHasError('phone','pattern')">
+										<strong>Please enter valid contact number. (eg: (xxx) xxx-xxxx)</strong>
+									</mat-error>
+								</mat-form-field>
+							</div>
+
+							<div class="form-group">
+								<mat-form-field>
+									<mat-label>Password</mat-label>
+									<input class="" matInput type="password" placeholder="Password" formControlName="password" autocomplete="off"/>
+									<mat-error *ngIf="isControlHasError('password','required')">
+										<strong>Please enter password</strong>
+									</mat-error>
+									<mat-error *ngIf="isControlHasError('password','minlength')">
+										<strong>Minimum 6 characters are required for password</strong>
+									</mat-error>
+									<mat-error *ngIf="isControlHasError('password','maxlength')">
+										<strong>Maximum 100 characters are required for password</strong>
+									</mat-error>
+								</mat-form-field>
+							</div>
+							
+							<div class="kt-login__actions">
+								<button (click)="submit()" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" id="kt_login_signin_submit" class="btn btn-log btn-block btn-thm2 mt-5" style="background: #60a8e0;border-radius: 20px;width: 18%;color:#fff;float: right;margin: 0 86px 0 0px;">
+									Submit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

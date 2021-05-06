@@ -1,0 +1,183 @@
+<div class="kt-portlet">
+	<div class="kt-portlet__head">
+    <div class="kt-portlet__head-label">
+      <h3 class="kt-portlet__head-title"><span>All Coupons</span></h3>
+    </div>
+    <div class="kt-portlet__head-toolbar">
+      <button (click)="open(content1)" class="btn btn-blue">Add Coupon</button>
+    </div>
+  </div>
+
+  <div class="kt-portlet__body pt-0">
+    <mat-form-field class="mat-form-field-infix">
+     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+   </mat-form-field>
+   
+   <div class="table-responsive"> 
+    <div class="mat-table__wrapper "> 
+     <mat-table #table [dataSource]="dataSource">
+
+       <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef check>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" check>
+        <mat-checkbox (click)="$event.stopPropagation()"
+        (change)="$event ? selection.toggle(row) : null"
+        [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </mat-cell>
+  </ng-container>
+  <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef pos cell-center> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element" pos cell-center> {{element.position}} </mat-cell>
+	</ng-container>
+
+    <ng-container matColumnDef="ccode" >
+      <mat-header-cell *matHeaderCellDef  cell-center>  Coupon Code </mat-header-cell>
+      <mat-cell *matCellDef="let element"  cell-center> {{element.ccode}} </mat-cell>
+    </ng-container>
+
+	
+
+	<!-- Address Column -->
+    <ng-container matColumnDef="dtype">
+      <mat-header-cell *matHeaderCellDef address cell-center>Discount Type </mat-header-cell>
+      <mat-cell *matCellDef="let element" address cell-center>{{element.dtype}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dvalue">
+      <mat-header-cell *matHeaderCellDef emailAddress cell-center> Discount Value</mat-header-cell>
+      <mat-cell *matCellDef="let element" emailAddress cell-center> {{element.dvalue}} </mat-cell>
+    </ng-container>
+
+
+  
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef action cell-center> Action </mat-header-cell>
+      <mat-cell *matCellDef="let element" action cell-center> 
+     
+          <button (click)="open(content2)" primary mat_primary_color mat-icon-button color="pink" matTooltip="Edit  Coupon">
+          <i class="fa fa-pencil-alt"></i>
+        </button> 	&nbsp;		     <button danger (click)="open(content)" mat-icon-button color="danger" matTooltip="Delete Coupon" type="button" (click)="deleteUser(user)">
+         <mat-icon>delete</mat-icon> </button>
+
+     </mat-cell>
+   </ng-container>
+
+    
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+ </mat-table>
+</div>
+</div>
+<mat-paginator #paginator
+[pageSize]="10"
+[pageSizeOptions]="[5, 10, 20]"
+[showFirstLastButtons]="true">
+</mat-paginator>
+</div>
+</div>
+<div class="kt-section">
+  <div class="kt-section__content">
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-body pt-4">
+        <button type="button" class="close close-modal" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div  class="modal-inner text-center">
+          <i class="flaticon2-close-cross fa-4x close-icon"></i>
+          <h4 class="mb-3">Are You Sure ?</h4>
+          <p class="mb-0">Are you sure you want to delete this records? This process cannot be undone</p>
+        </div>
+      </div>
+      <div class="modal-footer pt-4 no-border pt-0 justify-content-center pb-4">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<div class="kt-section ">
+  <div class="kt-section__content">
+    <ng-template #content1 let-c="close" let-d="dismiss">
+	 <div class="modal-heading addcoupon">
+	 <h4>Add Coupon</h4>
+        <button type="button" class="close close-modal" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+       
+      </div>
+      <div class="modal-body pt-4 couponform">
+        
+        <div  class="modal-inner text-center">
+        <div class="form-group  text-left">
+							<label class="frm_label">Coupon Code</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter Coupon Code" name="">
+							</div>
+						</div>
+						  <div class="form-group  text-left">
+							<label class="frm_label">Discount Type</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter Discount Type" name="">
+							</div>
+						</div>
+						 <div class="form-group  text-left">
+							<label class="frm_label">Discount Value</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter Discount Value" name="">
+							</div>
+						</div>
+        </div>
+		 <button type="button" class="btn btn-blue">Submit</button>
+      </div>
+    
+    </ng-template>
+  </div>
+</div>
+<div class="kt-section ">
+  <div class="kt-section__content">
+    <ng-template #content2 let-c="close" let-d="dismiss">
+	 <div class="modal-heading addcoupon">
+	 <h4>Edit Coupon</h4>
+        <button type="button" class="close close-modal" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+       
+      </div>
+      <div class="modal-body pt-4 couponform">
+        
+        <div  class="modal-inner text-center">
+        <div class="form-group  text-left">
+							<label class="frm_label">Coupon Code</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter Coupon Code" value="myfirstcoupon">
+							</div>
+						</div>
+						  <div class="form-group  text-left">
+							<label class="frm_label">Discount Type</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter Discount Type" value="percentage discount">
+							</div>
+						</div>
+						 <div class="form-group  text-left">
+							<label class="frm_label">Discount Value</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter Discount Value" value="$50">
+							</div>
+						</div>
+        </div>
+		 <button type="button" class="btn btn-blue">Submit</button>
+      </div>
+    
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~material-design-icons/iconfont/material-icons.css";
+@import "~highlight.js/styles/googlecode.css";
+
+// hide bootstrap dropdown arrow globally
+.dropdown-toggle::after {
+	display: none !important;
+}
+
+.mat-table__wrapper--dashboard .mat-table {
+	min-width: 600px !important;
+	width: 100% !important;
+}
+
+.position-static {
+	position: static;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.modal .modal-content {
+  
+    border: none!important;
+}
+button.btn.btn-blue:hover {
+    background: #fff;
+    color: #60a8e0;
+	
+    border: 2px solid #60a8e0;
+}
+
+button.btn.btn-blue {
+    background: #60a8e0;
+    color: #fff;font-size: 14px;
+    padding: 11px 25px;
+	border-radius:30px;
+	
+    border: 2px solid #60a8e0;
+}.kt-header-mobile__logo img {
+    height: 50px;
+}
+.kt-footer .kt-footer__wrapper .kt-footer__copyright {
+    display: flex!important;
+   width:100%!important;
+    justify-content: Center!important;
+}
+.kt-header__topbar-item.kt-header__topbar-item--search  .dropdown-menu.dropdown-menu-fit 
+{
+display:none!important;
+}
+kt-search-default {
+display:none!important;
+}
+
+@media (min-width: 1025px)
+{
+.kt-header-menu .kt-menu__nav > .kt-menu__item > .kt-menu__link > .kt-menu__link-text {
+   
+    color: #fff!important;
+}
+.kt-header-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--active > .kt-menu__link > .kt-menu__link-text, .kt-header-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--here > .kt-menu__link > .kt-menu__link-text {
+    color: #60a8e0!important;
+}
+}img.table-user {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.modal-footer
+{
+padding-top:1.5rem !important; 
+.btn-danger
+{
+     background: #d60101!important;
+    color: #fff!important;
+}
+}
+mat-header-row .mat-header-cell {
+    font-size: 14px!important;
+    color: #000!important;
+}

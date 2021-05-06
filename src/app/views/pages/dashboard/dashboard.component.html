@@ -1,0 +1,181 @@
+
+
+<div class="row">
+	<div class="col-xl-12">
+		<div class="row row-full-height">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			   <div class="card card-stats mb-3">
+					<div class="card-body ">
+						<div class="row card-inner">						
+							<div class="col-7 col-md-8">
+								 <div class="numbers">
+									<p class="card-number">{{countFaculties}}</p>
+									<p class="card-title">No of facilities</p>
+								</div>							
+							</div>
+							<div class="col-5 col-md-4">
+								<div class="icon-big text-center icon-warning">
+									<i class="fa fa-building fa-3x text-primary"></i>
+								</div>
+							</div>
+						</div>
+					  </div>
+				  </div>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			   <div class="card card-stats mb-3">
+					<div class="card-body ">
+						<div class="row card-inner">						
+							<div class="col-7 col-md-8">
+								 <div class="numbers">
+									<p class="card-number">{{countPatients}}</p>
+									<p class="card-title">Total Patients</p>
+								</div>							
+							</div>
+							<div class="col-5 col-md-4">
+								<div class="icon-big text-center icon-warning">
+									<i class="fa fa-users fa-3x text-green"></i>	
+								</div>
+							</div>
+						</div>
+					  </div>
+				  </div>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			   <div class="card card-stats mb-3">
+					<div class="card-body ">
+						<div class="row card-inner">						
+							<div class="col-7 col-md-8">
+								 <div class="numbers">
+									<p class="card-number">{{countContacts}}</p>
+									<p class="card-title">Total Contacts</p>
+								</div>							
+							</div>
+							<div class="col-5 col-md-4">
+								<div class="icon-big text-center icon-warning">
+									<i class="flaticon2-phone   fa-3x text-pink"></i>
+								</div>
+							</div>
+						</div>
+					  </div>
+				  </div>
+			</div>
+				<!-- <div class="col-sm-12 col-md-6 col-lg-3">
+				   <div class="card card-stats mb-3">
+						<div class="card-body ">
+							<div class="row card-inner">						
+								<div class="col-7 col-md-8">
+									 <div class="numbers">
+										<p class="card-number">500</p>
+										<p class="card-title">Recently Added Users</p>
+									</div>							
+								</div>
+								<div class="col-5 col-md-4">
+									<div class="icon-big text-center icon-warning">
+										<i class="flaticon2-user  fa-3x text-red"></i>
+									</div>
+								</div>
+							</div>
+						  </div>
+					  </div>
+				</div> -->
+		
+			 </div>
+		</div>
+	   <div  class="kt-space-20"></div>
+		<!-- <div class="col-lg-12 chat-1">
+			<kt-portlet [class]="'kt-portlet--height-fluid'">
+				<kt-portlet-header  [title]="'Recently Added Users'"></kt-portlet-header>
+				<kt-portlet-body>
+					<kt-widget14></kt-widget14>
+				</kt-portlet-body>
+			</kt-portlet>
+		</div> -->
+	</div>
+
+
+
+<div class="row">
+	<div class="col-xl-12">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'Recently Added Facilities'" [class]="'kt-portlet__head--lg  kt-portlet__head--break-sm'">
+				<ng-container ktPortletTools>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+
+
+				<table class="table table-striped">
+		            <thead>
+		                <tr>
+		                    <th scope="col">Facility Name</th>
+		                    <th scope="col">Facility Email</th>
+		                    <th scope="col">No. Of Patients</th>
+		                    <th scope="col">Action</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <tr *ngFor="let item of dataSource; let i = index;">
+		                    <td>{{item.organization_name}}</td>
+		                    <td>{{item?.email}}</td>
+		                    <td>
+		                    	<span class="countHit">
+		                    		{{item?.patientsCount}}
+		                    	</span>
+		                    </td>
+		                    <td>
+		                    	<button routerLink="/users/members/{{item._id}}" primary mat_primary_color mat-icon-button color="pink" matTooltip="View Members">
+									<i class="fa fa-users"></i>
+								</button>
+		                    </td>
+		                </tr>
+
+		                <tr *ngIf="dataSource?.length == 0">
+		                    <td colspan="5" style="text-align: center">
+		                        No facility have been added
+		                    </td>
+		                </tr>
+		            </tbody>
+		        </table>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+
+	<div class="col-xl-12">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'Recently Added Patients'" [class]="'kt-portlet__head--lg  kt-portlet__head--break-sm'">
+				<ng-container ktPortletTools>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+				<table class="table table-striped">
+		            <thead>
+		                <tr>
+		                    <th scope="col">Patient Name</th>
+		                    <th scope="col">Patient Email</th>
+		                    <th scope="col">Patient Contact</th>
+		                    <th scope="col">Room No</th>
+		                    <th scope="col">Under Facility</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <tr *ngFor="let item of totalPatients; let i = index;">
+		                    <td>{{item?.firstname}} {{item?.lastname}}</td>
+		                    <td>{{item?.email}}</td>
+		                    <td>{{item?.contact}}</td>
+		                    <td>{{item?.room_no}}</td>
+		                    <td><b>{{item?.faculty[0].organization_name}}</b></td>
+		                </tr>
+
+		                <tr *ngIf="totalPatients?.length == 0">
+		                    <td colspan="4" style="text-align: center">
+		                        No patient have been added
+		                    </td>
+		                </tr>
+		            </tbody>
+		        </table>
+			</kt-portlet-body>
+		</kt-portlet>
+
+	</div>
+</div>

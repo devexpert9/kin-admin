@@ -1,0 +1,14 @@
+<!-- begin:: Content Head -->
+<div class="kt-subheader kt-grid__item" [ngClass]="{'kt-container--clear': clear}" [hidden]="subheaderService.disabled$ | async" id="kt_subheader">
+	<div class="kt-container" [ngClass]="{'kt-container--fluid': fluid}">
+		<div class="kt-subheader__main">
+		<div class="breacrumb">
+			<h3 *ngIf="title" class="kt-subheader__title"><Strong>KIN</Strong>   <span  routerLink="/"  class="linktext"><i class="fa fa-home"></i></span>  <span class="linktext"><i class="fa fa-angle-right"></i></span>   <a href="javascript:void(0)" class="linktext"> {{title}} </a></h3>
+			 
+			
+		</div>
+		</div>
+	</div>
+</div>
+<!-- end:: Content Head -->
+  

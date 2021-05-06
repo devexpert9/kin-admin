@@ -1,0 +1,215 @@
+.head {
+    margin-bottom: 30px;
+ h2
+ {
+font-size: 22px;
+    font-weight: 600;
+    color: #000;
+    position: relative;
+    margin: 0px  0px 10px;
+    z-index: 1;
+	&:after
+	{
+    content: "";
+    position: absolute;
+    width: 55px;
+    height: 6px;
+    background: #7fc4fd;
+    bottom: 3px;
+    left: 0;
+    z-index: -1;
+	}
+	}
+}
+.form-group {
+    margin-bottom: 15px!important;
+    float: left!important;
+    width: 45%!important;
+    margin: 10px 0 0 10px!important;
+}
+.form-group input {
+    caret-color: #fd397a;
+    background: #f9f7f7;
+    padding: 10px;
+}
+.grp_form
+    {
+    ::ng-deep .mat-form-field-underline {
+        display: none;
+    }
+    .form_input{
+        border:1px solid #e2e5ec;
+        height: calc(1.5em + 1.3rem + 2px);
+        padding: 0.65rem 1rem;
+        border-radius: 4px;
+    }
+    .mat-form-field-label-wrapper{
+        position:unset
+    }
+    .btn-primary{
+        background-color: #32d8a0;
+        border-color: #32d8a0;
+        i{
+            color:#fff;
+        }
+    }
+}
+.form-control:focus{
+    border-color:#01a4f1
+}
+.profile_user{
+       background: #f9f9fc;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border: 2px solid #6bade1;
+    min-height: 350px;
+    .card {
+        border: none;
+        background: none;
+        img{
+            display:block;
+            margin:0 auto;
+            width: 150px;
+            height: 150px;
+        }
+        label{
+            position: relative;
+            display: inline-block;
+            color: #fff;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 3px;
+            cursor: pointer;
+           background: linear-gradient(to right, rgb(21, 140, 196) 0%, rgb(1, 163, 240) 51%, rgb(77, 198, 255) 100%);
+            
+        }
+    }
+}
+.profile_form{
+    padding-left:30px;
+}
+
+
+mat-form-field {
+    width: 100%;
+}
+img.card-img-top {
+    object-fit: cover;
+    max-height: 130px;
+}
+.form-group
+{    margin: 0;    width: 100%;
+label
+{
+    color: #757576;    width: 100%;
+}
+
+display: table;
+.e-droptext
+{ 
+.fa
+{
+color:#f7a61f;  margin-bottom: 15px;
+}
+    border: dashed 2px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.38);
+    display: table-cell;
+    font-size: 14px;
+    height: 65px;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    vertical-align: middle;
+    min-width: 300px;
+}.e-droptext1
+{ 
+.fa
+{
+color:#f7a61f;  margin-bottom: 15px;
+}
+    border: dashed 2px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.38);
+    display: block;
+    font-size: 14px;
+    height: 165px;
+    margin: 0 auto;
+	padding:40px;
+    text-align: center;
+    width: 100%;
+    vertical-align: middle;
+   
+}
+
+
+}
+
+.form-group.upload_file input[type="file"]{
+display:none;
+}
+.form-group.upload_file label{
+    font-weight: 400;
+    margin-top: 20px;
+    border: 2px dashed #f8007b;
+    position: relative;
+    text-align: center;
+    font-size: 18px;
+    min-height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.form-group.upload_file i{font-size:16px; margin-right:8px; color:#f8007b;}
+.img_view img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin: 12px 0;
+    outline: 2px solid #f8000063;
+    outline-offset: -10px;
+}
+.img_view{
+    position:relative;
+}
+.img_view a {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    background: #0000005c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#333;
+}
+.img_view a:hover{color:#f8007b;}
+.img_view a i {
+    background:rgba(255, 255, 255, 0.70);
+    padding: 5px;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    line-height: 16px;
+}
+.input-group.eros-file {
+    position: relative;
+	span.eudts {
+		position: absolute;
+		left: 10px;
+		z-index: 11;
+		top: 8px;
+		font-size: 16px;
+		font-weight: 500;
+	}
+	input.form-control {
+		padding-left: 35px;
+	}
+}
+.form-group
+{
+ margin-bottom:15px;
+}
